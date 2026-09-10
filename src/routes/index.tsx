@@ -132,7 +132,7 @@ function Studio() {
       const canvas = await snapshot();
       const { pdf, orientation } = SIZES[size];
       const doc = new jsPDF({ orientation, unit: "mm", format: pdf });
-      doc.addImage(canvas.toDataURL("image/jpeg", 0.98), "JPEG", 0, 0, pdf[0], pdf[1], undefined, "FAST");
+      doc.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdf[0], pdf[1], undefined, "SLOW");
       doc.save(`${data.fullName.replace(/\s+/g, "-").toLowerCase()}-${size}.pdf`);
       toast.success("PDF downloaded");
     } catch {
