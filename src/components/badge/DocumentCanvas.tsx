@@ -391,6 +391,55 @@ export const DocumentCanvas = forwardRef<HTMLDivElement, Props>(function Documen
               {data.body}
             </p>
 
+            <div
+              style={{
+                marginTop: 26,
+                display: "flex",
+                alignItems: "center",
+                gap: 22,
+                border: `1px solid ${t.hair}`,
+                padding: 18,
+                background: t.panel,
+              }}
+            >
+              <div
+                style={{
+                  width: 92,
+                  height: 92,
+                  flexShrink: 0,
+                  borderRadius: "50%",
+                  border: `1.5px solid ${a.base}`,
+                  position: "relative",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <GuillocheRosette
+                  color={a.base}
+                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.45 }}
+                />
+                <div style={{ position: "relative", textAlign: "center", lineHeight: 1.15 }}>
+                  <div style={{ fontFamily: t.display, fontSize: 20, color: a.base }}>
+                    {data.orgName.trim().charAt(0) || "C"}
+                  </div>
+                  <div style={{ fontFamily: t.mono, fontSize: 5.5, letterSpacing: "0.18em", color: t.soft }}>
+                    OFFICIAL SEAL
+                  </div>
+                </div>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 14, flex: 1 }}>
+                <Field label="Credential status" value="Active" t={t} />
+                <Field label="Verification" value={data.certificateId} t={t} mono />
+                <Field label="Issuing office" value={data.location} t={t} />
+                <Field label="Holder" value={data.fullName} t={t} />
+                <Field label="Role" value={data.position} t={t} />
+                <Field label="Authorised by" value={data.signerName} t={t} />
+              </div>
+            </div>
+
+
+
             <div style={{ marginTop: "auto", paddingTop: 28 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 24 }}>
                 <div style={{ maxWidth: 260, fontFamily: t.sans, fontSize: 9, lineHeight: 1.7, color: t.soft }}>
