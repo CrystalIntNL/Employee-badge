@@ -214,23 +214,39 @@ export const DocumentCanvas = forwardRef<HTMLDivElement, Props>(function Documen
     >
       {/* backdrop */}
       {template === "tech" && (
-        <TechGrid color={a.base} opacity={0.18} className="absolute inset-0 h-full w-full" />
+        <TechGrid
+          color={a.base}
+          style={{ opacity: 0.18, position: "absolute", inset: 0, width: "100%", height: "100%" }}
+        />
       )}
       {t.ornate && (
         <>
           <GuillocheRosette
             color={a.base}
-            opacity={0.13}
-            className="pointer-events-none absolute"
-            {...({ style: { opacity: 0.13, width: dims.w * 0.85, height: dims.w * 0.85, left: "50%", top: "50%", transform: "translate(-50%,-50%)", position: "absolute" } } as never)}
+            style={{
+              opacity: 0.13,
+              position: "absolute",
+              width: dims.w * 0.85,
+              height: dims.w * 0.85,
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%,-50%)",
+            }}
           />
           <GuillocheWaves
             color={a.base}
-            className="pointer-events-none absolute"
-            {...({ style: { opacity: 0.22, position: "absolute", left: 0, right: 0, bottom: 0, width: "100%", height: card ? 60 : 110 } } as never)}
+            style={{
+              opacity: 0.22,
+              position: "absolute",
+              left: 0,
+              bottom: 0,
+              width: "100%",
+              height: card ? 60 : 110,
+            }}
           />
         </>
       )}
+
 
       {/* frame */}
       <div
