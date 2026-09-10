@@ -72,8 +72,43 @@ function Studio() {
 
   const snapshot = async () => {
     const node = docRef.current!;
-    return html2canvas(node, { scale: 3, backgroundColor: null, useCORS: true, logging: false });
+    // Wait for webfonts + images so text metrics are final before rasterising.
+    if (document.fonts?.ready) await document.fonts.ready;
+    await Promise.all(
+      Array.from(node.querySelectorAll("img")).map((img) =>
+        img.complete ? Promise.resolve() : new Promise((r) => { img.onload = r; img.onerror = r; }),
+      ),
+    );
+
+    // Capture an unscaled offscreen clone: capturing a CSS-transformed node makes
+    // html2canvas mis-measure glyph positions (doubled / overlapping characters).
+    const holder = document.createElement("div");
+    holder.style.cssText = `position:fixed;left:-100000px;top:0;width:${SIZES[size].w}px;height:${SIZES[size].h}px;overflow:hidden;background:transparent;z-index:-1;`;
+    const clone = node.cloneNode(true) as HTMLDivElement;
+    clone.style.transform = "none";
+    clone.style.margin = "0";
+    holder.appendChild(clone);
+    document.body.appendChild(holder);
+
+    try {
+      await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+      return await html2canvas(clone, {
+        scale: 3,
+        backgroundColor: null,
+        useCORS: true,
+        logging: false,
+        width: SIZES[size].w,
+        height: SIZES[size].h,
+        windowWidth: SIZES[size].w,
+        windowHeight: SIZES[size].h,
+        scrollX: 0,
+        scrollY: 0,
+      });
+    } finally {
+      holder.remove();
+    }
   };
+
 
   const exportPng = async () => {
     setBusy(true);
