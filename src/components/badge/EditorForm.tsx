@@ -131,15 +131,15 @@ export function EditorForm({ data, onChange }: Props) {
               <span>Zoom</span>
               <span className="text-muted-foreground">{data.photoZoom.toFixed(2)}×</span>
             </Label>
-            <Slider min={1} max={2.5} step={0.01} value={[data.photoZoom]} onValueChange={([v]) => onChange({ photoZoom: v })} />
+            <Slider min={1} max={2.5} step={0.01} value={[data.photoZoom]} onValueChange={([v]) => onChange({ photoZoom: v ?? 1 })} />
           </div>
           <div className="space-y-2">
             <Label className="text-xs">Horizontal</Label>
-            <Slider min={0} max={100} step={1} value={[data.photoX]} onValueChange={([v]) => onChange({ photoX: v })} />
+            <Slider min={0} max={100} step={1} value={[data.photoX]} onValueChange={([v]) => onChange({ photoX: v ?? 50 })} />
           </div>
           <div className="space-y-2">
             <Label className="text-xs">Vertical</Label>
-            <Slider min={0} max={100} step={1} value={[data.photoY]} onValueChange={([v]) => onChange({ photoY: v })} />
+            <Slider min={0} max={100} step={1} value={[data.photoY]} onValueChange={([v]) => onChange({ photoY: v ?? 50 })} />
           </div>
         </div>
       </Section>
