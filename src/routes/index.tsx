@@ -20,6 +20,7 @@ import {
   type TemplateId,
 } from "@/lib/badge-types";
 import logoAsset from "@/assets/gold-logo.png.asset.json";
+import portraitAsset from "@/assets/demo-portrait.jpg.asset.json";
 import { Download, FileText, Printer, RotateCcw } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -44,7 +45,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Studio() {
-  const [data, setData] = useState<BadgeData>({ ...DEMO_DATA, logoUrl: logoAsset.url });
+  const [data, setData] = useState<BadgeData>({ ...DEMO_DATA, logoUrl: logoAsset.url, photoUrl: portraitAsset.url });
   const [template, setTemplate] = useState<TemplateId>("corporate");
   const [accent, setAccent] = useState<AccentId>("gold");
   const [size, setSize] = useState<SizeId>("letter");
@@ -119,7 +120,7 @@ function Studio() {
             </div>
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <Button variant="ghost" size="sm" onClick={() => setData({ ...DEMO_DATA, logoUrl: logoAsset.url })}>
+            <Button variant="ghost" size="sm" onClick={() => setData({ ...DEMO_DATA, logoUrl: logoAsset.url, photoUrl: portraitAsset.url })}>
               <RotateCcw className="mr-1.5 h-3.5 w-3.5" /> Demo data
             </Button>
             <Button variant="secondary" size="sm" onClick={() => window.print()}>
