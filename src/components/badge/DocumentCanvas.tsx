@@ -226,8 +226,9 @@ export const DocumentCanvas = forwardRef<HTMLDivElement, Props>(function Documen
             style={{
               opacity: 0.13,
               position: "absolute",
-              width: dims.w * 0.85,
-              height: dims.w * 0.85,
+              width: Math.min(dims.w, dims.h) * 0.85,
+              height: Math.min(dims.w, dims.h) * 0.85,
+
               left: "50%",
               top: "50%",
               transform: "translate(-50%,-50%)",
