@@ -270,7 +270,7 @@ export const DocumentCanvas = forwardRef<HTMLDivElement, Props>(function Documen
           <>
             {Header}
             <div style={{ display: "flex", gap: 16, flex: 1 }}>
-              <Photo data={data} size={104} ring={a.base} />
+              <Photo data={data} size={132} ring={a.base} />
               <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 10 }}>
                 <div>
                   <div style={{ fontFamily: t.display, fontSize: 26, lineHeight: 1.05, color: t.ink }}>{data.fullName}</div>
@@ -282,8 +282,25 @@ export const DocumentCanvas = forwardRef<HTMLDivElement, Props>(function Documen
                   <Field label="Issued" value={fmtDate(data.issueDate)} t={t} />
                   <Field label="Card ID" value={data.certificateId} t={t} mono />
                 </div>
+                <div style={{ marginTop: "auto", display: "flex", alignItems: "flex-end", gap: 10 }}>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ height: 26, display: "flex", alignItems: "flex-end" }}>
+                      {data.signatureUrl ? (
+                        <img src={data.signatureUrl} alt="" style={{ maxHeight: 26, maxWidth: 130, objectFit: "contain" }} />
+                      ) : (
+                        <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 15, color: t.soft }}>
+                          {data.signerName}
+                        </span>
+                      )}
+                    </div>
+                    <div style={{ borderTop: `1px solid ${a.base}`, paddingTop: 3, fontFamily: t.sans, fontSize: 7.5, color: t.soft }}>
+                      {data.signerTitle}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
+
             <div
               style={{
                 borderTop: `1px solid ${t.hair}`,
