@@ -1,5 +1,7 @@
 import { forwardRef } from "react";
 import { ACCENTS, SIZES, type AccentId, type BadgeData, type SizeId, type TemplateId } from "@/lib/badge-types";
+import diamondWatermarkAsset from "@/assets/ci-diamond-watermark.png.asset.json";
+import goldStampAsset from "@/assets/gold-approval-stamp.png.asset.json";
 import { GuillocheRosette, GuillocheWaves, TechGrid } from "./Guilloche";
 
 interface Props {
@@ -219,21 +221,24 @@ export const DocumentCanvas = forwardRef<HTMLDivElement, Props>(function Documen
           style={{ opacity: 0.18, position: "absolute", inset: 0, width: "100%", height: "100%" }}
         />
       )}
+      <img
+        src={diamondWatermarkAsset.url}
+        alt=""
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          left: "50%",
+          top: card ? "53%" : "49%",
+          width: card ? 250 : 470,
+          height: "auto",
+          transform: "translate(-50%, -50%)",
+          opacity: template === "minimalist" ? 0.035 : template === "tech" ? 0.055 : 0.045,
+          filter: template === "minimalist" ? "none" : "invert(1)",
+          pointerEvents: "none",
+        }}
+      />
       {t.ornate && (
         <>
-          <GuillocheRosette
-            color={a.base}
-            style={{
-              opacity: 0.13,
-              position: "absolute",
-              width: Math.min(dims.w, dims.h) * 0.85,
-              height: Math.min(dims.w, dims.h) * 0.85,
-
-              left: "50%",
-              top: "50%",
-              transform: "translate(-50%,-50%)",
-            }}
-          />
           <GuillocheWaves
             color={a.base}
             style={{
@@ -421,29 +426,24 @@ export const DocumentCanvas = forwardRef<HTMLDivElement, Props>(function Documen
             >
               <div
                 style={{
-                  width: 92,
-                  height: 92,
+                  width: 104,
+                  height: 108,
                   flexShrink: 0,
-                  borderRadius: "50%",
-                  border: `1.5px solid ${a.base}`,
-                  position: "relative",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                 }}
               >
-                <GuillocheRosette
-                  color={a.base}
-                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.45 }}
+                <img
+                  src={goldStampAsset.url}
+                  alt="Crystal Intelligence Seal of Approval"
+                  style={{
+                    width: 104,
+                    height: 108,
+                    objectFit: "contain",
+                    display: "block",
+                  }}
                 />
-                <div style={{ position: "relative", textAlign: "center", lineHeight: 1.15 }}>
-                  <div style={{ fontFamily: t.display, fontSize: 20, color: a.base }}>
-                    {data.orgName.trim().charAt(0) || "C"}
-                  </div>
-                  <div style={{ fontFamily: t.mono, fontSize: 5.5, letterSpacing: "0.18em", color: t.soft }}>
-                    OFFICIAL SEAL
-                  </div>
-                </div>
               </div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 14, flex: 1 }}>
                 <Field label="Credential status" value="Active" t={t} />
