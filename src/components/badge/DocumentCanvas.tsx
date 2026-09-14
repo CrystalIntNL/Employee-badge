@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import { ACCENTS, SIZES, type AccentId, type BadgeData, type SizeId, type TemplateId } from "@/lib/badge-types";
 import diamondWatermarkAsset from "@/assets/ci-diamond-watermark.png.asset.json";
 import goldStampAsset from "@/assets/gold-approval-stamp.png.asset.json";
-import { GuillocheRosette, GuillocheWaves, TechGrid } from "./Guilloche";
+import { GuillocheWaves, TechGrid } from "./Guilloche";
 
 interface Props {
   data: BadgeData;
@@ -67,9 +67,17 @@ function themeFor(template: TemplateId, accent: string): Theme {
 
 function fmtDate(v: string) {
   if (!v) return "—";
-  const d = new Date(v);
+  const dateOnly = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v);
+  const d = dateOnly
+    ? new Date(Date.UTC(Number(dateOnly[1]), Number(dateOnly[2]) - 1, Number(dateOnly[3])))
+    : new Date(v);
   if (Number.isNaN(d.getTime())) return v;
-  return d.toLocaleDateString("en-GB", { day: "2-digit", month: "long", year: "numeric" });
+  return d.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
 }
 
 function Photo({ data, size, ring }: { data: BadgeData; size: number; ring: string }) {
@@ -228,13 +236,17 @@ export const DocumentCanvas = forwardRef<HTMLDivElement, Props>(function Documen
         style={{
           position: "absolute",
           left: "50%",
-          top: card ? "53%" : "49%",
-          width: card ? 250 : 470,
+          top: "50%",
+          width: card ? 360 : 650,
+          maxWidth: "84%",
+          maxHeight: "76%",
           height: "auto",
           transform: "translate(-50%, -50%)",
-          opacity: template === "minimalist" ? 0.035 : template === "tech" ? 0.055 : 0.045,
-          filter: template === "minimalist" ? "none" : "invert(1)",
+          objectFit: "contain",
+          opacity: template === "minimalist" ? 0.055 : template === "tech" ? 0.075 : 0.065,
+          filter: template === "minimalist" ? "grayscale(1)" : "grayscale(1) invert(1)",
           pointerEvents: "none",
+          zIndex: 0,
         }}
       />
       {t.ornate && (
@@ -270,7 +282,7 @@ export const DocumentCanvas = forwardRef<HTMLDivElement, Props>(function Documen
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: card ? 5 : 8, background: gradient }} />
 
       {/* content */}
-      <div style={{ position: "relative", display: "flex", flexDirection: "column", height: "100%", gap: card ? 12 : 0 }}>
+      <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", height: "100%", gap: card ? 12 : 0 }}>
         {card ? (
           <>
             {Header}
@@ -418,39 +430,50 @@ export const DocumentCanvas = forwardRef<HTMLDivElement, Props>(function Documen
                 marginTop: 26,
                 display: "flex",
                 alignItems: "center",
-                gap: 22,
-                border: `1px solid ${t.hair}`,
-                padding: 18,
-                background: t.panel,
+                gap: 26,
+                padding: "14px 4px 12px",
+                borderTop: `1px solid ${t.hair}`,
+                borderBottom: `1px solid ${t.hair}`,
               }}
             >
               <div
                 style={{
-                  width: 104,
-                  height: 108,
+                  width: 122,
                   flexShrink: 0,
                   display: "flex",
+                  flexDirection: "column",
                   alignItems: "center",
                   justifyContent: "center",
+                  gap: 5,
                 }}
               >
                 <img
                   src={goldStampAsset.url}
                   alt="Crystal Intelligence Seal of Approval"
                   style={{
-                    width: 104,
-                    height: 108,
+                    width: 116,
+                    height: 116,
                     objectFit: "contain",
                     display: "block",
                   }}
                 />
+                <div
+                  style={{
+                    fontFamily: t.sans,
+                    fontSize: 7,
+                    letterSpacing: "0.16em",
+                    textTransform: "uppercase",
+                    color: a.base,
+                    textAlign: "center",
+                  }}
+                >
+                  Official seal
+                </div>
               </div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 14, flex: 1 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", columnGap: 28, rowGap: 15, flex: 1 }}>
                 <Field label="Credential status" value="Active" t={t} />
                 <Field label="Verification" value={data.certificateId} t={t} mono />
-                <Field label="Issuing office" value={data.location} t={t} />
                 <Field label="Holder" value={data.fullName} t={t} />
-                <Field label="Role" value={data.position} t={t} />
                 <Field label="Authorised by" value={data.signerName} t={t} />
               </div>
             </div>
