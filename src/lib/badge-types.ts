@@ -1,4 +1,4 @@
-export type TemplateId = "corporate" | "minimalist" | "tech";
+export type TemplateId = "corporate" | "minimalist" | "tech" | "classic";
 export type AccentId = "gold" | "navy" | "emerald" | "mono";
 export type SizeId = "letter" | "a4" | "cr80";
 
@@ -43,6 +43,7 @@ export const TEMPLATES: { id: TemplateId; label: string; description: string }[]
   { id: "corporate", label: "Corporate Executive", description: "Black & metallic, guilloche engraving" },
   { id: "minimalist", label: "Modern Minimalist", description: "Light paper, clean editorial type" },
   { id: "tech", label: "Tech Badge", description: "Dark grid, monospaced data blocks" },
+  { id: "classic", label: "Classic Certificate", description: "Formal ivory paper, gold border & serif type" },
 ];
 
 export const SIZES: Record<SizeId, { id: SizeId; label: string; w: number; h: number; pdf: [number, number]; orientation: "portrait" | "landscape" }> = {

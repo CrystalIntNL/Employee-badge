@@ -52,6 +52,19 @@ function themeFor(template: TemplateId, accent: string): Theme {
       ornate: false,
     };
   }
+  if (template === "classic") {
+    return {
+      bg: "#FFFCF3",
+      panel: "rgba(255,255,255,0.72)",
+      ink: "#272016",
+      soft: "#706656",
+      hair: accent,
+      display: "'Cormorant Garamond', Georgia, serif",
+      sans,
+      mono,
+      ornate: true,
+    };
+  }
   return {
     bg: "#0A0A0B",
     panel: "#111113",
@@ -265,6 +278,31 @@ export const DocumentCanvas = forwardRef<HTMLDivElement, Props>(function Documen
         </>
       )}
 
+      {template === "classic" && (
+        <>
+          <div
+            style={{
+              position: "absolute",
+              inset: card ? 13 : 28,
+              border: `3px double ${a.base}`,
+              opacity: 0.72,
+              pointerEvents: "none",
+            }}
+          />
+          {!card && (
+            <div
+              style={{
+                position: "absolute",
+                inset: 34,
+                border: `1px solid ${a.base}`,
+                opacity: 0.28,
+                pointerEvents: "none",
+              }}
+            />
+          )}
+        </>
+      )}
+
 
       {/* frame */}
       <div
@@ -272,7 +310,7 @@ export const DocumentCanvas = forwardRef<HTMLDivElement, Props>(function Documen
           position: "absolute",
           inset: card ? 8 : 18,
           border: `1px solid ${template === "minimalist" ? t.hair : a.base}`,
-          opacity: template === "minimalist" ? 1 : 0.75,
+          opacity: template === "minimalist" ? 1 : template === "classic" ? 0.35 : 0.75,
           pointerEvents: "none",
         }}
       />
