@@ -19,7 +19,7 @@ import {
   type SizeId,
   type TemplateId,
 } from "@/lib/badge-types";
-import logoAsset from "@/assets/gold-logo.png.asset.json";
+import logoAsset from "@/assets/ci-logo-yellow.png.asset.json";
 import portraitAsset from "@/assets/demo-portrait.jpg.asset.json";
 import { Download, FileText, Printer, RotateCcw } from "lucide-react";
 
