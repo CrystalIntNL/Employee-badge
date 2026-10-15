@@ -172,12 +172,16 @@ export const DocumentCanvas = forwardRef<HTMLDivElement, Props>(function Documen
   const Header = (
     <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
       {data.logoUrl ? (
-        <img src={data.logoUrl} alt="" style={{ width: card ? 34 : 52, height: card ? 34 : 52, objectFit: "contain" }} />
+        <img
+          src={data.logoUrl}
+          alt=""
+          style={{ height: card ? 40 : 56, width: card ? 52 : 73, objectFit: "contain", flexShrink: 0 }}
+        />
       ) : (
         <div
           style={{
-            width: card ? 34 : 52,
-            height: card ? 34 : 52,
+            width: card ? 40 : 56,
+            height: card ? 40 : 56,
             border: `1px solid ${a.base}`,
             display: "flex",
             alignItems: "center",
