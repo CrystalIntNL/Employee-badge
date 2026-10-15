@@ -180,8 +180,8 @@ export const DocumentCanvas = forwardRef<HTMLDivElement, Props>(function Documen
       ) : (
         <div
           style={{
-            width: card ? 40 : 56,
-            height: card ? 40 : 56,
+            width: card ? 32 : 42,
+            height: card ? 32 : 42,
             border: `1px solid ${a.base}`,
             display: "flex",
             alignItems: "center",
