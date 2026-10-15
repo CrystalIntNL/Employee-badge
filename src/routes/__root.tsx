@@ -36,7 +36,8 @@ function NotFoundComponent() {
 
 const ErrorComponent = lazy(async () => ({ default: RootErrorComponent }));
 
-function RootErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function RootErrorComponent({ error, reset }: { error: unknown; reset: () => void }) {
+  const err = error instanceof Error ? error : new Error(String(error));
   console.error(error);
   const router = useRouter();
   useEffect(() => {
