@@ -38,10 +38,10 @@ const ErrorComponent = lazy(async () => ({ default: RootErrorComponent }));
 
 function RootErrorComponent({ error, reset }: { error: unknown; reset: () => void }) {
   const err = error instanceof Error ? error : new Error(String(error));
-  console.error(error);
+  console.error(err);
   const router = useRouter();
   useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
+    reportLovableError(err, { boundary: "tanstack_root_error_component" });
   }, [error]);
 
   return (
