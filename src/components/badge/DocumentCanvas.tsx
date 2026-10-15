@@ -318,7 +318,7 @@ export const DocumentCanvas = forwardRef<HTMLDivElement, Props>(function Documen
       )}
 
       {/* content */}
-      <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", height: "100%", gap: card ? 12 : 0 }}>
+      <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", height: "100%", gap: card ? 12 : 0, justifyContent: card ? "flex-start" : "space-between" }}>
         {card ? (
           <>
             {Header}
@@ -482,7 +482,7 @@ export const DocumentCanvas = forwardRef<HTMLDivElement, Props>(function Documen
 
 
 
-            <div style={{ marginTop: "auto", paddingTop: 28 }}>
+            <div style={{ paddingTop: 28 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 24 }}>
                 <div style={{ maxWidth: 260, fontFamily: t.sans, fontSize: 9, lineHeight: 1.7, color: t.soft }}>
                   <div style={{ letterSpacing: "0.18em", textTransform: "uppercase", color: a.base, marginBottom: 5 }}>
