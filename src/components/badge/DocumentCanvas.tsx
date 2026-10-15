@@ -175,7 +175,7 @@ export const DocumentCanvas = forwardRef<HTMLDivElement, Props>(function Documen
         <img
           src={data.logoUrl}
           alt=""
-          style={{ height: card ? 40 : 56, width: card ? 52 : 73, objectFit: "contain", flexShrink: 0 }}
+          style={{ height: card ? 32 : 42, width: "auto", objectFit: "contain", flexShrink: 0 }}
         />
       ) : (
         <div
