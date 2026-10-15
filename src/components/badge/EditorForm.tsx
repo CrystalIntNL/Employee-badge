@@ -151,7 +151,7 @@ export function EditorForm({ data, onChange }: Props) {
         <Text label="Position / title" value={data.position} onChange={(v) => onChange({ position: v })} />
         <div className="grid grid-cols-2 gap-3">
           <Text label="Employment number" value={data.employmentNumber} onChange={(v) => onChange({ employmentNumber: v })} />
-          <Text label="Location / home" value={data.location} onChange={(v) => onChange({ location: v })} />
+          <Text label="Location" value={data.location} onChange={(v) => onChange({ location: v })} />
           <Text label="Issue date" type="date" value={data.issueDate} onChange={(v) => onChange({ issueDate: v })} />
           <Text label="Certificate ID" value={data.certificateId} onChange={(v) => onChange({ certificateId: v })} />
         </div>

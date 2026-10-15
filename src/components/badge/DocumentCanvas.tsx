@@ -1,7 +1,6 @@
 import { forwardRef } from "react";
 import { ACCENTS, SIZES, type AccentId, type BadgeData, type SizeId, type TemplateId } from "@/lib/badge-types";
 import diamondWatermarkAsset from "@/assets/ci-diamond-watermark.png.asset.json";
-import goldStampAsset from "@/assets/gold-approval-stamp.png.asset.json";
 import { GuillocheWaves, TechGrid } from "./Guilloche";
 
 interface Props {
@@ -317,10 +316,9 @@ export const DocumentCanvas = forwardRef<HTMLDivElement, Props>(function Documen
       {!card && t.ornate && (
         <div style={{ position: "absolute", inset: 25, border: `0.5px solid ${a.base}`, opacity: 0.35, pointerEvents: "none" }} />
       )}
-      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: card ? 5 : 8, background: gradient }} />
 
       {/* content */}
-      <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", height: "100%", gap: card ? 12 : 0 }}>
+      <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", height: "100%", gap: card ? 12 : 0, justifyContent: card ? "flex-start" : "space-between" }}>
         {card ? (
           <>
             {Header}
@@ -443,7 +441,7 @@ export const DocumentCanvas = forwardRef<HTMLDivElement, Props>(function Documen
                   }}
                 >
                   <Field label="Employment Number" value={data.employmentNumber} t={t} mono />
-                  <Field label="Location / Home" value={data.location} t={t} />
+                  <Field label="Location" value={data.location} t={t} />
                   <Field label="Department" value={data.department} t={t} />
                   <Field label="Date of Issue" value={fmtDate(data.issueDate)} t={t} />
                 </div>
@@ -474,40 +472,6 @@ export const DocumentCanvas = forwardRef<HTMLDivElement, Props>(function Documen
                 borderBottom: `1px solid ${t.hair}`,
               }}
             >
-              <div
-                style={{
-                  width: 122,
-                  flexShrink: 0,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: 5,
-                }}
-              >
-                <img
-                  src={goldStampAsset.url}
-                  alt="Crystal Intelligence Seal of Approval"
-                  style={{
-                    width: 116,
-                    height: 116,
-                    objectFit: "contain",
-                    display: "block",
-                  }}
-                />
-                <div
-                  style={{
-                    fontFamily: t.sans,
-                    fontSize: 7,
-                    letterSpacing: "0.16em",
-                    textTransform: "uppercase",
-                    color: a.base,
-                    textAlign: "center",
-                  }}
-                >
-                  Official seal
-                </div>
-              </div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", columnGap: 28, rowGap: 15, flex: 1 }}>
                 <Field label="Credential status" value="Active" t={t} />
                 <Field label="Verification" value={data.certificateId} t={t} mono />
@@ -518,7 +482,7 @@ export const DocumentCanvas = forwardRef<HTMLDivElement, Props>(function Documen
 
 
 
-            <div style={{ marginTop: "auto", paddingTop: 28 }}>
+            <div style={{ paddingTop: 28 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 24 }}>
                 <div style={{ maxWidth: 260, fontFamily: t.sans, fontSize: 9, lineHeight: 1.7, color: t.soft }}>
                   <div style={{ letterSpacing: "0.18em", textTransform: "uppercase", color: a.base, marginBottom: 5 }}>
